@@ -8,15 +8,12 @@ const red = document.querySelector("#red")
 red.style.backgroundColor="red"
 let backGroundRed=red.style.backgroundColor
 
-
 const green = document.querySelector("#green")
 green.style.backgroundColor="green"
 let backGroundGreen=green.style.backgroundColor
 
-
 const blue = document.querySelector("#blue")
 let backGroundBlue=blue.style.backgroundColor="blue"
-
 
 //03[x]. Adicione a cor preta como a primeira cor da paleta de cores
 //04[x]. Adicione um botão para gerar cores aleatórias para a paleta de cores
@@ -32,23 +29,27 @@ const randomColors=()=>{
             let g = Math.random()*255;
             let b = Math.random()*255;
             cores[i].style.backgroundColor=`rgba(${r},${g},${b})`
-        }   
+        }
+        
+        saveColorPalette()
     }) 
+    
 } 
 randomColors()
 
 //05[ ]. Implemente uma função usando o localStorage para que a paletra de cores gerada aleatoriamente seja mantida após recarregar a página.
-const salvaPaleta =()=>{
-
-localStorage.setItem("backgroundRed", backGroundRed)
-localStorage.setItem("backgroundGreen", backGroundGreen)
-localStorage.setItem("backgroundBlue", backGroundBlue)
-
+const saveColorPalette = ()=>{
+    let colorPalette = document.querySelector("#color-palette").innerHTML
+        localStorage.setItem("colorPalette", JSON.stringify(colorPalette))
 }
-salvaPaleta();
 
 
 
+// const recoverColorPalette = ()=>{
+//     let colorPalette = document.querySelector("#color-palette").innerHTML
+//     colorPalette= JSON.parse(localStorage.getItem("colorPalette"))
+
+// }
 
 
 //06[x]. Adicione à página um quadro contendo 25 pixels
@@ -87,7 +88,10 @@ let quadrados= document.querySelectorAll("#pixel-board div")
 for(let quadrado of quadrados){
     quadrado.addEventListener("click",(event)=>{
         const selected=document.querySelector(".selected")
-        event.target.style.backgroundColor=selected.style.backgroundColor
+        quadrado.style.backgroundColor=selected.style.backgroundColor
+
+
+        saveBoard()
     })
 }
 //11[x]. Crie um botão que retorne a cor do quadro para a cor inicial
@@ -105,3 +109,17 @@ const limpar=()=>{
 limpar();
 
 //12[ ]. Crie uma função para salvar e recuperar o seu desenho atual no localStorage
+
+const saveBoard = ()=>{
+    let boardColors = document.querySelector("#pixel-board").innerHTML
+        localStorage.setItem("pixelBoard", JSON.stringify(boardColors))
+}
+
+// const recoverBoard = ()=>{
+//     let boardColors = document.querySelector("#pixel-board").innerHTML
+//     boardColors= JSON.parse(localStorage.getItem("pixel-board"))
+// }
+
+// 13[ ]. Crie um input que permita à pessoa usuária preencher um novo tamanho para o quadro de pixels.
+// 14[ ]. Crie uma função que limite o tamanho mínimo e máximo do quadro de pixels.
+// 15[ ]. Crie uma função para manter o tamanho novo do board ao recarregar a página.
