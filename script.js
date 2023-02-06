@@ -43,13 +43,15 @@ const saveColorPalette = ()=>{
         localStorage.setItem("colorPalette", JSON.stringify(colorPalette))
 }
 
+const recoverColorPalette = ()=>{
+    let colorPalette = document.querySelector("#color-palette").innerHTML
+    colorPalette= JSON.parse(localStorage.getItem("colorPalette"))
 
+}
+window.onload=()=>{
+    recoverColorPalette()
+}
 
-// const recoverColorPalette = ()=>{
-//     let colorPalette = document.querySelector("#color-palette").innerHTML
-//     colorPalette= JSON.parse(localStorage.getItem("colorPalette"))
-
-// }
 
 
 //06[x]. Adicione à página um quadro contendo 25 pixels
