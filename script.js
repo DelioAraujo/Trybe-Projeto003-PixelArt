@@ -44,13 +44,12 @@ const saveColorPalette = ()=>{
 }
 
 const recoverColorPalette = ()=>{
-    let colorPalette = document.querySelector("#color-palette").innerHTML
-    colorPalette= JSON.parse(localStorage.getItem("colorPalette"))
+    let colorPalette = document.querySelector("#color-palette")
+    colorPalette.innerHTML= JSON.parse(localStorage.getItem("colorPalette"))
 
 }
-window.onload=()=>{
-    recoverColorPalette()
-}
+// recoverColorPalette()
+
 
 
 
@@ -123,5 +122,36 @@ const saveBoard = ()=>{
 // }
 
 // 13[ ]. Crie um input que permita à pessoa usuária preencher um novo tamanho para o quadro de pixels.
+let novoTamanho = document.querySelector("#board-size")
+let vqv=document.querySelector("#generate-board")
+let tabela = document.querySelector("#pixel-board")
+
+vqv.addEventListener("click", ()=>{
+    console.log(novoTamanho.value)
+    tabela.innerHTML=""
+    fazGrade(novoTamanho.value);
+    tabela.style.width=`${40*(Math.sqrt(novoTamanho))}px`
+    if(novoTamanho.value===""){
+        alert("Board inválido!")
+    }
+
+    salvarNovoTamanho()
+    
+})
+
 // 14[ ]. Crie uma função que limite o tamanho mínimo e máximo do quadro de pixels.
+novoTamanho.addEventListener("change", ()=>{
+    if (novoTamanho.value < 5) {
+        novoTamanho.value = 5;
+      } else if (novoTamanho.value > 50) {
+        novoTamanho.value = 50;
+      }
+})
+
+
+
 // 15[ ]. Crie uma função para manter o tamanho novo do board ao recarregar a página.
+
+const salvarNovoTamanho = ()=>{
+    localStorage.setItem("boardSize",JSON.stringify(novoTamanho.value))
+}
