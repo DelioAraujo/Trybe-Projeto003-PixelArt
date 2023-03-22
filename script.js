@@ -43,12 +43,12 @@ const saveColorPalette = ()=>{
         localStorage.setItem("colorPalette", JSON.stringify(colorPalette))
 }
 
-const recoverColorPalette = ()=>{
-    let colorPalette = document.querySelector("#color-palette")
-    colorPalette.innerHTML= JSON.parse(localStorage.getItem("colorPalette"))
+// const recoverColorPalette = ()=>{
+//     let colorPalette = document.querySelector("#color-palette")
+//     colorPalette.innerHTML= JSON.parse(localStorage.getItem("colorPalette"))
 
-}
-// recoverColorPalette()
+// }
+// recoverColorPalette()------------------------------
 
 
 
@@ -86,15 +86,20 @@ selecionaCor()
 //10[x]. Crie uma função que permita preencher um pixel do quadra com a cor selecionada na paletra de cores
 
 let quadrados= document.querySelectorAll("#pixel-board div")
-for(let quadrado of quadrados){
-    quadrado.addEventListener("click",(event)=>{
-        const selected=document.querySelector(".selected")
-        quadrado.style.backgroundColor=selected.style.backgroundColor
-
-
-        saveBoard()
-    })
+let pintaQuadro = ()=>{
+    for(let quadrado of quadrados){
+        quadrado.addEventListener("click",(event)=>{
+            const selected=document.querySelector(".selected")
+            quadrado.style.backgroundColor=selected.style.backgroundColor
+    
+    
+            saveBoard()
+        })
+    }
 }
+pintaQuadro()
+
+
 //11[x]. Crie um botão que retorne a cor do quadro para a cor inicial
 
 const limpar=()=>{
@@ -119,7 +124,7 @@ const saveBoard = ()=>{
 // const recoverBoard = ()=>{
 //     let boardColors = document.querySelector("#pixel-board").innerHTML
 //     boardColors= JSON.parse(localStorage.getItem("pixel-board"))
-// }
+// } --------------------------------
 
 // 13[ ]. Crie um input que permita à pessoa usuária preencher um novo tamanho para o quadro de pixels.
 let novoTamanho = document.querySelector("#board-size")
@@ -130,14 +135,15 @@ vqv.addEventListener("click", ()=>{
     console.log(novoTamanho.value)
     tabela.innerHTML=""
     fazGrade(novoTamanho.value);
-    tabela.style.width=`${40*(Math.sqrt(novoTamanho))}px`
+    tabela.style.width=`${40*(novoTamanho.value)}px`
     if(novoTamanho.value===""){
         alert("Board inválido!")
     }
 
     salvarNovoTamanho()
-    
 })
+
+//não colore mais.............................
 
 // 14[ ]. Crie uma função que limite o tamanho mínimo e máximo do quadro de pixels.
 novoTamanho.addEventListener("change", ()=>{
@@ -147,8 +153,6 @@ novoTamanho.addEventListener("change", ()=>{
         novoTamanho.value = 50;
       }
 })
-
-
 
 // 15[ ]. Crie uma função para manter o tamanho novo do board ao recarregar a página.
 
